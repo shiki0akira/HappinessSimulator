@@ -254,13 +254,13 @@
 主持人自己的手機開一個網址，跟大螢幕連同一個房間，跟著大螢幕翻頁。
 
 ```
-/hN                   → 第 N 關的備忘錄，讓他輸入四碼房號（/h2 就是第二關）
-/hN?room=XXXX         → 直接連上那一間
+/happiness/hN              → 第 N 關的備忘錄，讓他輸入四碼房號（/happiness/h2 就是第二關）
+/happiness/hN?room=XXXX    → 直接連上那一間
 ```
 
 **大螢幕右上角有一顆「📱 主持人備忘錄」按鈕**，點開跳出 QR，用自己的手機掃。按鍵盤 `N` 也可以，`Esc` 或點畫面任一處收起來。
 
-掃不到就打 QR 底下那行網址（`/h1`、`/h2`），跟玩家一樣輸入四碼房號就連上了。**現場工具不能只有一條路。**
+掃不到就打 QR 底下那行網址（`/happiness/h1`、`/happiness/h2`），跟玩家一樣輸入四碼房號就連上了。**現場工具不能只有一條路。**
 
 
 > 這個網址能翻頁。房號本來就是公開的，所以真正的風險是「有人亂翻頁」——惡作劇等級，不是安全問題。但還是別讓它整晚掛在牆上。
@@ -304,7 +304,7 @@
 
 ```
 worker/
-  index.js       路由：/api/new-room、/ws、/1–/7、/h1–/h7，其餘丟給靜態資源
+  index.js       路由：/happiness/ 底下的 api/new-room、ws、1–7、h1–h7，其餘丟給靜態資源
   room.js        Durable Object：一個房號一個房間，七關共用同一個 class
   wN-game.js     第 N 關的規則（純函式）
   wN-data.js     第 N 關的文案：卡組、標的、經文
@@ -314,9 +314,9 @@ public/happiness/
   wN/            第 N 關的主畫面、玩家手機頁、主持人備忘錄（notes.js）
 ```
 
-七關共用同一個 Durable Object class，`/ws?week=N&room=XXXX` 決定連到哪一間。**加一關就是加 `worker/wN-data.js`、`worker/wN-game.js`、`public/happiness/wN/`，共用層不用動。**
+七關共用同一個 Durable Object class，`/happiness/ws?week=N&room=XXXX` 決定連到哪一間。**加一關就是加 `worker/wN-data.js`、`worker/wN-game.js`、`public/happiness/wN/`，共用層不用動。**
 
-玩家入場走 `/1`–`/7`，主持人備忘錄走 `/h1`–`/h7`，兩個都吃 `?room=XXXX`。網址越短 QR 模組越大、隔著電視越好掃，而且手機鍵盤打起來也不痛苦 —— 所以連查詢字串都不要。
+玩家入場走 `/happiness/1`–`/happiness/7`，主持人備忘錄走 `/happiness/h1`–`/happiness/h7`，兩個都吃 `?room=XXXX`。網址越短 QR 模組越大、隔著電視越好掃，而且手機鍵盤打起來也不痛苦 —— 所以連查詢字串都不要。（前面那段 `/happiness` 是掛上 vibeweb100.com 時為了跟系列的「遊戲代號在前」一致加的；大部分人是掃 QR 或在系列頁輸入房號，真正手打的不多。）
 
 `wrangler dev` 就是完整的伺服器（Worker + DO 都在本機跑），**現場斷網時可以直接用它跑完整場**，玩家連同一個 Wi-Fi、開你電腦的區網網址就好。
 

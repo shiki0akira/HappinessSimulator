@@ -3,8 +3,8 @@
   'use strict';
   var WEEK = 5;
   // 大螢幕上印給人手動打字的網址。越短越好打 —— 手機鍵盤打 ? 和 = 很痛苦。
-  var JOIN_PATH = '/5';
-  var NOTES_PATH = '/h5';   // 主持人備忘錄，掃不到的時候也打得出來
+  var JOIN_PATH = '/happiness/5';
+  var NOTES_PATH = '/happiness/h5';   // 主持人備忘錄，掃不到的時候也打得出來
   var S = null;
   var stage = document.getElementById('stage');
 
@@ -204,7 +204,7 @@
           '<p class="muted mono" style="font-size:calc(13px * var(--u));margin:0">房號</p>' +
           '<div class="roomcode">' + esc(ROOM || '····') + '</div>' +
           '<p class="muted" style="margin:14px 0 6px">掃碼，或到這個網址輸入房號：</p>' +
-          '<div class="url">' + esc(location.host + JOIN_PATH) + '</div></div>' +
+          '<div class="url">' + esc(location.host.replace(/^www\./, '')) + '<wbr><span style="white-space:nowrap">' + esc(JOIN_PATH) + '</span>' + '</div></div>' +
         '</div>' +
         '<div class="names">' + (S.players.length
           ? S.players.map(function (p) { return '<span>' + esc(p.name) + '</span>'; }).join('')
@@ -464,7 +464,7 @@
   if (existing) {
     start(existing, false);
   } else {
-    fetch('/api/new-room').then(function (r) { return r.json(); }).then(function (d) {
+    fetch('/happiness/api/new-room').then(function (r) { return r.json(); }).then(function (d) {
       var u = new URL(location.href);
       u.searchParams.set('room', d.room);
       location.replace(u.toString());

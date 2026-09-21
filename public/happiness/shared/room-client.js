@@ -5,6 +5,14 @@
 
   var CODE_RE = /^[A-HJ-NP-Z2-9]{4}$/;
 
+  // 在 www.vibeweb100.com 上，網頁是 Vercel 代理過來的，但 Vercel 代理 WebSocket 升級不可靠，
+  // 所以長連線跳過代理、直接連 Worker（跟 Web100 02～04 同一個做法）。
+  // 本機 wrangler dev、區網、直接開 workers.dev 時都還是同源。
+  var WORKER_HOST = 'happiness-simulator.shiki0akira.workers.dev';
+  function wsHost() {
+    return /(^|\.)vibeweb100\.com$/.test(location.hostname) ? WORKER_HOST : location.host;
+  }
+
   function connect(opts) {
     var role = opts.role === 'host' ? 'host' : 'player';
     var week = opts.week || 1;
@@ -20,7 +28,7 @@
       var q = '?room=' + encodeURIComponent(code) + '&role=' + role + '&week=' + week;
       if (pid) q += '&pid=' + encodeURIComponent(pid);
       if (fresh) q += '&fresh=1';
-      return proto + '//' + location.host + '/ws' + q;
+      return proto + '//' + wsHost() + '/happiness/ws' + q;
     }
 
     function open() {

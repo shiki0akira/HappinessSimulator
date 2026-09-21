@@ -5,8 +5,8 @@
 (function () {
   'use strict';
   var WEEK = 7;
-  var JOIN_PATH = '/7';
-  var NOTES_PATH = '/h7';
+  var JOIN_PATH = '/happiness/7';
+  var NOTES_PATH = '/happiness/h7';
   var S = null;
   var stage = document.getElementById('stage');
 
@@ -86,7 +86,7 @@
           '<p class="muted mono" style="font-size:calc(13px * var(--u));margin:0">房號</p>' +
           '<div class="roomcode">' + esc(ROOM || '····') + '</div>' +
           '<p class="muted" style="margin:14px 0 6px">掃碼，或到這個網址輸入房號：</p>' +
-          '<div class="url">' + esc(location.host + JOIN_PATH) + '</div></div>' +
+          '<div class="url">' + esc(location.host.replace(/^www\./, '')) + '<wbr><span style="white-space:nowrap">' + esc(JOIN_PATH) + '</span>' + '</div></div>' +
         '</div>' +
         '<div class="names">' + (S.players.length
           ? S.players.map(function (p) { return '<span>' + esc(p.name) + '</span>'; }).join('')
@@ -435,7 +435,7 @@
   if (existing) {
     start(existing, false);
   } else {
-    fetch('/api/new-room').then(function (r) { return r.json(); }).then(function (d) {
+    fetch('/happiness/api/new-room').then(function (r) { return r.json(); }).then(function (d) {
       var u = new URL(location.href);
       u.searchParams.set('room', d.room);
       location.replace(u.toString());

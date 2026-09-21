@@ -34,19 +34,29 @@
 
 ## 網址
 
+正式網址：<https://www.vibeweb100.com/happiness/zh-TW/>
+
 ```
 系列頁      /happiness/zh-TW/
 第一關      /happiness/w1/zh-TW/          ← 主持人大螢幕
 第二關      /happiness/w2/zh-TW/
-第三關      /happiness/w3/zh-TW/
-第四關      /happiness/w4/zh-TW/
-第五關      /happiness/w5/zh-TW/
-第六關      /happiness/w6/zh-TW/
-玩家入場    /1 /2 … /7                    ← 大螢幕上印的就是這個，最短、最好打
-主持人備忘錄 /h1 /h2 … /h7                ← 右上角按鈕跳出的 QR 編的就是這個
+…
+第七關      /happiness/w7/zh-TW/
+玩家入場    /happiness/1 … /happiness/7   ← 大螢幕上印的、QR 編的就是這個
+主持人備忘錄 /happiness/h1 … /happiness/h7 ← 右上角按鈕跳出的 QR 編的就是這個
 （兩個都吃 ?room=XXXX，帶了就直接進那一間，沒帶就出現輸入四碼的畫面）
 玩家手機    /happiness/wN/zh-TW/p/?room=XXXX
 ```
+
+### 掛在 vibeweb100.com 底下
+
+Worker 本身在 <https://happiness-simulator.shiki0akira.workers.dev>，`www.vibeweb100.com/happiness/*` 是首頁 repo（`web100_00_Homepage`）的 `vercel.json` 代理過來的，跟 Web100 其他專案同一套：
+
+- **網頁、`/happiness/api/new-room`、短網址走代理。** 代理規則是白名單，**多一個頁面或靜態目錄時要回首頁 repo 補一條**，不然本機測得到、線上 404
+- **WebSocket 不走代理**，`room-client.js` 看到網域是 vibeweb100.com 就直接連 workers.dev —— Vercel 代理 WebSocket 升級不可靠
+- **Worker 的轉址只給路徑、不給完整網址**，不然代理進來的人會被轉到 workers.dev
+- 舊的根目錄短網址（`/1`、`/h1`、`/ws`、`/api/new-room`）在 workers.dev 上還能用，只是不再印出來
+- 只有系列頁給 Google 收錄（有 canonical 與 `sitemap.xml`），各關的主畫面、玩家頁、備忘錄都是 `noindex` —— 它們沒有房間就沒有內容
 
 系列頁（`/happiness/zh-TW/`）上有「我要加入房間」，點開是一個 popup：輸入四碼房號、選第幾關，就導到那一關的玩家頁。組員自己打網址進來的時候，那是他唯一找得到的入口。
 
@@ -68,7 +78,7 @@ npx wrangler deploy
 
 ```
 worker/
-  index.js       路由：/api/new-room、/ws、/1–/7、/h1–/h7，其餘丟給靜態資源
+  index.js       路由：/happiness/ 底下的 api/new-room、ws、1–7、h1–h7，其餘丟給靜態資源
   room.js        Durable Object：一個房號一個房間
   w1-game.js     第一關的規則（純函式）
   w2-game.js     第二關的規則
@@ -81,7 +91,7 @@ public/happiness/
   w2/            第二關：同上
 ```
 
-七關共用同一個 Durable Object class，`/ws?week=N&room=XXXX` 決定連到哪一間。`room.js` 裡的 `GAMES = { 1: W1, 2: W2 }` 決定套哪一關的規則 —— **加第三關就是加 `worker/w3-*.js`、`public/happiness/w3/`，再到 `GAMES` 多一行。**
+七關共用同一個 Durable Object class，`/happiness/ws?week=N&room=XXXX` 決定連到哪一間。`room.js` 裡的 `GAMES = { 1: W1, 2: W2 }` 決定套哪一關的規則 —— **加第三關就是加 `worker/w3-*.js`、`public/happiness/w3/`，再到 `GAMES` 多一行。**
 
 ## 隱私
 
@@ -123,7 +133,7 @@ public/happiness/
 | 動作 | 怎麼做 |
 |---|---|
 | 翻頁 | 底下按鈕、鍵盤 `→` `空白鍵` / `←`，或你手機上的備忘錄 |
-| **主持人備忘錄** | 右上角的「📱 主持人備忘錄」按鈕（或按 `N`），跳出 QR 用手機掃。掃不到就打 `/h1`、`/h2` |
+| **主持人備忘錄** | 右上角的「📱 主持人備忘錄」按鈕（或按 `N`），跳出 QR 用手機掃。掃不到就打 `/happiness/h1`、`/happiness/h2` |
 | 備忘錄同步 | **兩個方向都會同步** —— 大螢幕翻到哪它跟到哪，從它翻頁大螢幕也跟著走 |
 | 跳頁 | 底下的下拉選單（第一關跳到「幸福拍賣會」會重跑拍賣） |
 | 拍賣控制（W1） | 立即開標／+15 秒／每項之間等我／重跑拍賣 |
