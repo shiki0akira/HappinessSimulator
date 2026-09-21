@@ -406,6 +406,7 @@
       jump.onchange = function () { post('goto', { idx: Number(jump.value) }); };
     }
     jump.value = String(S.phaseIdx);
+    HappyGA.phase(WEEK, S.phaseIdx, S.phases.length);
 
     document.getElementById('hint').textContent =
       S.phase.id === 'lobby' ? '玩家掃碼進場後按「下一頁」開始' : '';
@@ -504,6 +505,7 @@
     fetch('/happiness/api/new-room').then(function (r) { return r.json(); }).then(function (d) {
       var u = new URL(location.href);
       u.searchParams.set('room', d.room);
+      HappyGA.later('room_created', { week: WEEK });
       location.replace(u.toString());
     }).catch(function () {
       document.getElementById('stage').innerHTML =

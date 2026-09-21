@@ -370,6 +370,7 @@
       jump.onchange = function () { post('goto', { idx: Number(jump.value) }); };
     }
     jump.value = String(S.phaseIdx);
+    HappyGA.phase(WEEK, S.phaseIdx, S.phases.length);
 
     var isAuction = S.phase.id === 'auction';
     document.getElementById('auctionctl').style.display = isAuction ? 'inline-flex' : 'none';
@@ -462,7 +463,7 @@
   else {
     fetch('/happiness/api/new-room')
       .then(function (r) { return r.json(); })
-      .then(function (d) { start(d.room, true); })
+      .then(function (d) { HappyGA.event('room_created', { week: WEEK }); start(d.room, true); })
       .catch(function () {
         document.getElementById('stage').innerHTML =
           '<h2>連不上伺服器</h2><p class="lede">重新整理看看。如果一直失敗，改用本機版：<span class="mono">npx wrangler dev</span></p>';

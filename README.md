@@ -58,6 +58,15 @@ Worker 本身在 <https://happiness-simulator.shiki0akira.workers.dev>，`www.vi
 - 舊的根目錄短網址（`/1`、`/h1`、`/ws`、`/api/new-room`）在 workers.dev 上還能用，只是不再印出來
 - 只有系列頁給 Google 收錄（有 canonical 與 `sitemap.xml`），各關的主畫面、玩家頁、備忘錄都是 `noindex` —— 它們沒有房間就沒有內容
 
+### GA4
+
+`public/happiness/shared/analytics.js`，每一頁都載。跟 Web100 系列共用同一個資源 `G-S7PE5687BG`：
+
+- **只在 vibeweb100.com 上送**，本機和 workers.dev 上的測試不會混進報表
+- `page_view` 手動送，網址上的 `?room=XXXX` 拿掉（不然每一間房都是一個不同的網頁）
+- 自訂事件一律 `happy_` 前綴，都帶 `week`：`happy_room_created`（大螢幕）→ `happy_player_joined`（那支手機）→ `happy_game_started`（大螢幕翻過入場頁）→ `happy_level_finished`（大螢幕翻到最後一頁）
+- **只在做那個動作的那台裝置送**，而且同一間房同一件事只記一次（`sessionStorage`），重整、翻回去再翻過來都不會重複
+
 系列頁（`/happiness/zh-TW/`）上有「我要加入房間」，點開是一個 popup：輸入四碼房號、選第幾關，就導到那一關的玩家頁。組員自己打網址進來的時候，那是他唯一找得到的入口。
 
 主畫面一打開就會跟 Worker 要一個四碼房號，同時把 QR 畫出來。房號放在查詢字串 `?room=XXXX`，掃 QR 進來就是這個網址；掃不到就到玩家網址手動輸入四碼。房號在網址上，所以主持人重整頁面不會換房。

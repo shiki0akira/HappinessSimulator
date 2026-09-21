@@ -40,6 +40,7 @@
       onState: function (d) { S = d; render(); },
       onPid: function (p) {
         pid = p;
+        HappyGA.joined(WEEK);
         try { localStorage.setItem(PID_KEY, pid); } catch (e) {}
         sig = '';
       },
