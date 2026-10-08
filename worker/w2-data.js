@@ -45,7 +45,7 @@ export const PICK = 3;
 export const GIFT = {
   mask: '？',
   title: '買三送一的寶物',
-  name: '生命',
+  name: '永恆的生命',
   rate: 0,
   line: '買三送一的那一樣，你一開始就拿到了 —— 只是不知道它是什麼。',
   bless: '這是一份從耶穌而來、永恆的寶物。',

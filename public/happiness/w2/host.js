@@ -341,6 +341,10 @@
         '</div>';
     },
 
+    testimony: function () {
+      return StageParts.testimony();
+    },
+
     prayer: function () {
       return StageParts.prayer({
         lede: '今天有哪一樣的折舊，讓你心裡動了一下？寫下來。只有你自己看得到。',

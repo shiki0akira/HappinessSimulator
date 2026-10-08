@@ -37,6 +37,7 @@ export const PHASES = [
   { id: 'naming',       tag: '機制事件', title: '第二個指數是！' },
   { id: 'verse',        tag: '經文',     title: '領受經文' },
   { id: 'teach',        tag: '信息',     title: '盜賊和「我」分別是什麼' },
+  { id: 'testimony',    tag: '見證',     title: '見證分享' },
   { id: 'prayer',       tag: '互動點 3', title: '祝福禱告' },
   { id: 'card',         tag: '週卡',     title: '儲存模擬回憶' },
   { id: 'end',          tag: '預告',     title: '下週預告' },

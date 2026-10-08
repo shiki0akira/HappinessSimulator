@@ -218,6 +218,8 @@
 
     teach: function () { return wait('聽主持人說'); },
 
+    testimony: function () { return wait('聽主持人分享'); },
+
     prayer: function (me) {
       var mine = readBurden();
       return '<h2>祝福禱告</h2>' +
