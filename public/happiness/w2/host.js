@@ -331,9 +331,9 @@
     teach: function () {
       var col = function (cls, o) {
         return '<div class="col3 ' + cls + '"><h3>' + esc(o.name) + '</h3>' +
-          o.lines.map(function (l) {
-            return '<p style="margin:10px 0 0;font-size:calc(18px * var(--u));line-height:1.8;color:var(--ink-2)">' + esc(l) + '</p>';
-          }).join('') + '</div>';
+          '<ul class="teachlist">' + o.lines.map(function (l) {
+            return '<li><b>' + esc(l.k) + '</b><span>' + esc(l.t) + '</span></li>';
+          }).join('') + '</ul></div>';
       };
       return '<h2>' + esc(S.teach.title) + '</h2>' +
         '<div class="cols3" style="grid-template-columns:1fr 1fr">' +

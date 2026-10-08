@@ -236,6 +236,17 @@
   .col3.thief h3 { color: var(--vol); }
   .col3.jesus { border-left: 12px solid var(--root-c); }
   .col3.jesus h3 { color: var(--root-c); }
+  /* 這兩欄是條列不是文章：短標先進眼睛，說明跟在下面一行 */
+  .teachlist { list-style: none; margin: calc(14px * var(--u)) 0 0; padding: 0;
+    display: grid; gap: min(calc(16px * var(--u)), 2.6vh); }
+  .teachlist li { position: relative; padding-left: calc(24px * var(--u)); }
+  .teachlist li::before { content: ''; position: absolute; left: 0; top: calc(9px * var(--u));
+    width: calc(11px * var(--u)); height: calc(11px * var(--u)); background: currentColor; }
+  .teachlist b { display: block; font-size: calc(23px * var(--u)); font-weight: 900; letter-spacing: .02em; }
+  .teachlist span { display: block; margin-top: calc(4px * var(--u));
+    font-size: calc(17px * var(--u)); line-height: 1.75; color: var(--ink-2); }
+  .col3.thief .teachlist { color: var(--vol); }
+  .col3.jesus .teachlist { color: var(--root-c); }
 
   /* 經文。用 em 限行長：ch 在中文字體上量的是數字寬度，會把整段擠成一條 */
   .verse { margin-top: calc(10px * var(--u)); }
