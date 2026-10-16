@@ -263,6 +263,12 @@
       });
     },
 
+    // 進遊戲前的開場：一個標題、一句話，畫面上什麼都不用按。
+    roads: function () {
+      return '<div class="solo"><h2>' + esc(S.map.introTitle) + '</h2>' +
+        '<p class="sololine">' + esc(S.map.introLine) + '</p></div>';
+    },
+
     // 標題旁邊不再掛「二十歲開始，五個選擇…」—— 底下那一行「當你 20 歲時…」
     // 已經把人放進場景裡了，上面再講一次規則只會把這一頁變成說明書。
     map: function () {
@@ -285,6 +291,8 @@
     // 「射不中」那一段不印在牆上 —— 那是你講的。
     sins: function () {
       return '<h2>' + esc(S.sins.title) + '</h2>' +
+        '<div class="verse back"><blockquote>「' + S.sins.quote.map(esc).join('<br>') + '」' +
+          '<span class="ref">' + esc(S.sins.ref) + '</span></blockquote></div>' +
         '<p class="lede big-lede">' + esc(S.sins.lead) + '</p>' +
         '<div class="sintags">' + S.sins.tags.map(function (t) {
           return '<span class="sintag"><b>' + esc(t.k) + '</b><i>' + esc(t.v) + '</i></span>';

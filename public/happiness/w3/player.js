@@ -87,6 +87,10 @@
           (draft.byVisits ? '我有卡片，改填幸福根基' : '忘記帶卡片？改填「這是你第幾次來」') + '</button>';
     },
 
+    roads: function () {
+      return '<h2>' + esc(S.map.introTitle) + '</h2>' + wait('看大螢幕');
+    },
+
     // 岔路：兩顆單選按鈕，點來點去都可以 —— 主持人公布結果之前都算數。
     // 公布之後這一頁就變成他自己那一邊的結果。
     map: function (me) {

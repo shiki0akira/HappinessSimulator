@@ -22,6 +22,7 @@ export const NEWCOMER_INNER = 15;
 export const PHASES = [
   { id: 'lobby',     tag: '入場',     title: '掃碼進場' },
   { id: 'reconnect', tag: '接關',     title: '輸入幸福指數' },
+  { id: 'roads',     tag: '開場',     title: '人生有很多條路' },
   { id: 'map',       tag: '互動點 1', title: '人生模擬器 · 選一條路' },
   { id: 'endings',   tag: '結算頁',   title: '三十二種人生' },
   { id: 'sin',       tag: '信息',     title: '為什麼我們做不出最好的選擇？' },
