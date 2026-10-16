@@ -268,13 +268,13 @@
   .sololine { margin-top: min(calc(22px * var(--u)), 3vh); max-width: 34em;
     font-size: min(calc(24px * var(--u)), 3.2vh); line-height: 1.8; color: var(--ink-2); }
 
-  /* 因為罪：七宗罪貼成標籤 */
+  /* 因為罪：七宗罪加上憂鬱，八個標籤 */
   /* **這一句不准斷行。** 一斷行「決定。」會自己掉到第二行，那一句就散了 ——
      所以不吃 max-width，改成一行到底，字級跟著版面寬度縮。 */
   .big-lede { font-size: min(calc(26px * var(--u)), 3.4vh, 1.95vw) !important;
     max-width: none; white-space: nowrap;
     margin-top: min(calc(14px * var(--u)), 2vh) !important; }
-  /* 七個標籤排成四欄，4 ＋ 3 —— 用 flex 換行會變成 6 ＋ 1，最後一個很孤單 */
+  /* 八個標籤排成四欄，4 ＋ 4 */
   .sintags { display: grid; grid-template-columns: repeat(4, 1fr);
     gap: min(calc(14px * var(--u)), 2vh) calc(14px * var(--u));
     margin-top: min(calc(26px * var(--u)), 3.4vh); }
@@ -463,6 +463,6 @@
 <script src="/happiness/shared/qr.js"></script>
 <script src="/happiness/shared/room-client.js"></script>
 <script src="/happiness/shared/stage-parts.js"></script>
-<script src="/happiness/w3/host.js?v=20261016"></script>
+<script src="/happiness/w3/host.js?v=20261016b"></script>
 </body>
 </html>
