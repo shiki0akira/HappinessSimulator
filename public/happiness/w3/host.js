@@ -291,7 +291,7 @@
     // 「射不中」那一段不印在牆上 —— 那是你講的。
     sins: function () {
       return '<h2>' + esc(S.sins.title) + '</h2>' +
-        '<div class="verse back"><blockquote>「' + S.sins.quote.map(esc).join('<br>') + '」' +
+        '<div class="verse sinverse"><blockquote>「' + esc(S.sins.quote).replace('；', '；<br>') + '」' +
           '<span class="ref">' + esc(S.sins.ref) + '</span></blockquote></div>' +
         '<p class="lede big-lede">' + esc(S.sins.lead) + '</p>' +
         '<div class="sintags">' + S.sins.tags.map(function (t) {

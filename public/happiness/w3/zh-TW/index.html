@@ -387,6 +387,9 @@
   .verse.back blockquote { max-width: none; white-space: nowrap;
     font-size: min(calc(40px * var(--u)), 4.6vh, 2.7vw); }
   .verse.back blockquote .ref { white-space: normal; }
+  /* 因為罪那一頁標題底下的第二關經文：整節比較長，字縮小、可以斷行 */
+  .verse.sinverse blockquote { max-width: none; line-height: 1.5;
+    font-size: min(calc(30px * var(--u)), 3.6vh, 2.2vw); }
   /* 救恩之路那一頁：還沒點到的後半句先淡著 */
   .verse.half blockquote .on { color: var(--root-c); }
   .verse.half blockquote .off { color: var(--ink-3); opacity: .45; }
@@ -460,6 +463,6 @@
 <script src="/happiness/shared/qr.js"></script>
 <script src="/happiness/shared/room-client.js"></script>
 <script src="/happiness/shared/stage-parts.js"></script>
-<script src="/happiness/w3/host.js"></script>
+<script src="/happiness/w3/host.js?v=20261016"></script>
 </body>
 </html>
